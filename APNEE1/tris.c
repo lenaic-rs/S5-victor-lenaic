@@ -3,8 +3,10 @@
 
 #define NMAX 1000000		/* peut etre modifie si necessaire */
 
-long nb_comparaisons_tot_insertion = 0;
-long nb_comparaisons_tot_segmentation = 0;
+long nb_comparaisons_tot_insertion = 0; // variable globale permettant de conserver 
+                                        // le nombre de comparaisons pour le tri par insertion
+long nb_comparaisons_tot_segmentation = 0; // variable globale permettant de conserver 
+                                           // le nombre de comparaisons pour le tri par segmentation
 
 
 /*
@@ -134,30 +136,29 @@ void lancer_mesures() {
   int T[NMAX];
   int N;
   int X;
-  //printf("Valeur du germe pour la fonction de tirage aleatoire ? ") ;
-  scanf("%d", &germe) ;
+
+  scanf("%d", &germe) ;  // Valeur du germe pour la fonction de tirage aleatoire
   srand(germe) ;
   do {
-
-  	//printf("Valeur de X ? ") ;
-  	scanf("%d", &X) ;
+  	scanf("%d", &X) ; // Valeur de X
   } while (X<1 || X > NMAX) ;
 
-  //printf("Valeur de N ? ") ;
-  scanf("%d", &N) ;
-  while (N>=1 && N <= NMAX) {
+  scanf("%d", &N) ; // Valeur de N
+
+  while (N>=1 && N <= NMAX) { // Le programme s'arrête lorsque l'on donne un N négatif ou supérieur à NMAX
     nb_comparaisons_tot_insertion = 0;
     nb_comparaisons_tot_segmentation = 0;
     
     for (int i = 0; i < X; i++) {
       generation_aleatoire_non_uniforme(T, N) ; /* initialisation du tableau T */
-      // tri_insertion(T, N) ;	/* tri de T */
-      tri_segmentation(T, N) ;	/* tri de T */
+      // commenter en fonction du type de tri testé
+      // tri_insertion(T, N) ;	/* tri de T par insertion */ 
+      tri_segmentation(T, N) ;	/* tri de T par segmentation */
     }
     
-    //printf("Valeur de N ? ") ;
+    // commenter en fonction du type de tri testé
     // printf("%d %f\n", N, (float) nb_comparaisons_tot_insertion / X);
     printf("%d %f\n", N, (float) nb_comparaisons_tot_segmentation / X);
-    scanf("%d", &N) ;
+    scanf("%d", &N) ; // Nouveau N
   } 
 }
