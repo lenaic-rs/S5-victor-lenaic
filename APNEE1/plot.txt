@@ -1,0 +1,5 @@
+plot "resultat.txt" with linespoints
+set xlabel "N"
+set ylabel "nombre moyen de comparaisons"
+set term png
+set out "resultat.png";
