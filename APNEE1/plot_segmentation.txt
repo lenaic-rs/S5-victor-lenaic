@@ -1,0 +1,5 @@
+set term png
+set xlabel "N"
+set ylabel "nombre moyen de comparaisons"
+set out "resultat_segmentation.png"
+plot "tri_segmentation.txt" with linespoints title "Tri par segmentation"

@@ -12,3 +12,6 @@ clean:
 
 plot:
 	gnuplot ./plot.txt -p
+
+plot-seg:
+	gnuplot ./plot_segmentation.txt -p

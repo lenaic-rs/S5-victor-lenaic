@@ -1,10 +1,10 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#define NMAX 50000		/* peut etre modifie si necessaire */
+#define NMAX 1000000		/* peut etre modifie si necessaire */
 
-int nb_comparaisons_tot_partition = 0;
-int nb_comparaisons_tot_segmentation = 0;
+long nb_comparaisons_tot_insertion = 0;
+long nb_comparaisons_tot_segmentation = 0;
 
 
 /*
@@ -65,9 +65,9 @@ void tri_insertion(int t[], int n) {
     /* insertion de la clef */
     t[j+1] = Clef;
   }
-  nb_comparaisons_tot_partition += nb_comparaisons;
+  nb_comparaisons_tot_insertion += nb_comparaisons;
   // printf("Nombre de comparaisons tri insertion : %d\n", nb_comparaisons);
-  // printf("%d\n", nb_comparaisons_tot_partition);
+  // printf("%d\n", nb_comparaisons_tot_insertion);
 }
 
 /*
@@ -146,21 +146,18 @@ void lancer_mesures() {
   //printf("Valeur de N ? ") ;
   scanf("%d", &N) ;
   while (N>=1 && N <= NMAX) {
-    nb_comparaisons_tot_partition = 0;
+    nb_comparaisons_tot_insertion = 0;
+    nb_comparaisons_tot_segmentation = 0;
     
     for (int i = 0; i < X; i++) {
-      generation_aleatoire(T, N) ; /* initialisation du tableau T */
-      tri_insertion(T, N) ;	/* tri de T */
-      
-
+      generation_aleatoire_non_uniforme(T, N) ; /* initialisation du tableau T */
+      // tri_insertion(T, N) ;	/* tri de T */
+      tri_segmentation(T, N) ;	/* tri de T */
     }
-    printf("%d %f\n", N, (float) nb_comparaisons_tot_partition / X);
-
-    //for (int i = 0; i < X; i++) {
-    //  generation_aleatoire(T, N) ; /* initialisation du tableau T */
-    //  tri_segmentation(T, N) ;	/* tri de T */
-    //}
+    
     //printf("Valeur de N ? ") ;
+    // printf("%d %f\n", N, (float) nb_comparaisons_tot_insertion / X);
+    printf("%d %f\n", N, (float) nb_comparaisons_tot_segmentation / X);
     scanf("%d", &N) ;
   } 
 }
