@@ -10,3 +10,5 @@ mesure_tris: mesure_tris.o tris.o
 clean:
 	rm -f mesure_tris *.o
 
+plot:
+	gnuplot ./plot.txt -p
