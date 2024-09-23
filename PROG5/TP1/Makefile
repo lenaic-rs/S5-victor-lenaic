@@ -1,5 +1,5 @@
 CC=clang
-CFLAGS=-Wall -Werror -g
+CFLAGS=-Wall -g
 
 PROGRAMS=test_vecteur test_vecteur_memfail \
          test_matrice test_matrice_memfail \
