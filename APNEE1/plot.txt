@@ -1,5 +1,0 @@
-set term png
-set xlabel "N"
-set ylabel "nombre moyen de comparaisons"
-set out "resultat_insertion_non_uni.png"
-plot "tri_insertion_non_uni.txt" with linespoints title "Tri par insertion"
