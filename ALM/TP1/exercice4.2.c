@@ -2,26 +2,27 @@
 #include <stdint.h>
 #include <stdlib.h>
 
+// l'entier k "est dans" le crible c
 int present(int k, uint32_t *c)
-{ // l'entier k "est dans" le crible c
+{
 
     uint16_t m = 1 << (k % 32);
     return (c[k / 32] & m) != 0;
 }
 
-void suppression(int k, uint32_t *x)
+void suppression(int k, uint32_t *c)
 {
 
-    uint16_t m = 1 << k;
-    *x = (*x & ~m) | 0 << k;
+    uint16_t m = 1 << (k % 32);
+    c[k / 32] = c[k / 32] & ~m;
 }
 
 void construit_crible(uint32_t *c, int borne, int n)
 {
-    // toodo
-    for (int i = 0; i < n; i++)
+
+    for (int i = 0; i < borne; i++)
     {
-        c[i] = 1;
+        c[i] = ~0;
     }
     for (int k = 2; k < n; k++)
     {
@@ -50,7 +51,11 @@ int main(int argc, char **argv)
         crible = (uint32_t *)malloc(borne * sizeof(uint32_t));
         construit_crible(crible, borne, x);
         printf("Nombres premiers jusqu'a %d : \n", x);
-        // mettre instructions pour affichage...
+
+        for (int k = 0; k < x; k++)
+            if (present(k, crible))
+                printf("%d, ", k);
+        printf("\n");
     }
     else
     {
