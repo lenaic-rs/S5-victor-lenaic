@@ -3,12 +3,14 @@
 
 // renvoie la valeur (0 ou 1) du bit numéro
 // k dans l'entier 16 bits x
-int consulte_bit(uint16_t x, unsigned int k) {
+int consulte_bit(uint16_t x, unsigned int k)
+{
     uint16_t m = 1 << k;
-    return (x & m )!= 0;
+    return (x & m) != 0;
 }
 
-void modifie_bit(uint16_t *x, unsigned int k, int v) {
+void modifie_bit(uint16_t *x, unsigned int k, int v)
+{
     uint16_t m = 1 << k;
     *x = (*x & ~m) | v << k;
 }
