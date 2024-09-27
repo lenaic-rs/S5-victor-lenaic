@@ -80,10 +80,10 @@ int main (void) {
       // write_leds_int_variante(1, 0, 0, 0);
       // write_leds_int_variante(1, 0, 1, 0);
       // write_leds_int_variante(1, 1, 1, 1);
-      sortie_int(0);
+      // sortie_int(0);
       // sortie_int(17);
       //sortie_int(n);
-      //sortie_int_bsrr(n);
+      sortie_int_bsrr(n);
       //chenillard(n%12);
       //write_leds_int(n%12);
       plusplus ();
