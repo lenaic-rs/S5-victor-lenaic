@@ -8,8 +8,9 @@ void config_leds_pins()
 
 void write_leds_int(uint16_t intval)
 {
-   uint32_t t = GPIOD_ODR & (~(15 << 12));
-   uint32_t m = intval & 0xf;
+   uint32_t val = intval;
+   uint32_t t = GPIOD_ODR & (~(0xf << 12));
+   uint32_t m = val & 0xf;
    GPIOD_ODR = t | (m << 12);
 }
 

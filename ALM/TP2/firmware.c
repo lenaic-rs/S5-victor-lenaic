@@ -53,9 +53,9 @@ void sortie_int (uint16_t v) {
 }
 
 void sortie_int_bsrr (uint16_t v) {
-   //GPIOD_ODR=0x2345;
+   GPIOD_ODR=0x2345;
    write_leds_int_bsrr(v);
-   //val= GPIOD_ODR;
+   val= GPIOD_ODR;
 }
 
 #define DELTA 1000000
@@ -74,18 +74,18 @@ int main (void) {
    config_leds_pins();   
    //systick_config(RELOAD_VAl_350MS);
    while (1) {
-      // write_leds_int_variante(0, 0, 0, 1);
+      //write_leds_int_variante(0, 0, 0, 0);
       // write_leds_int_variante(0, 0, 1, 0);
       // write_leds_int_variante(0, 1, 0, 0);
       // write_leds_int_variante(1, 0, 0, 0);
       // write_leds_int_variante(1, 0, 1, 0);
       // write_leds_int_variante(1, 1, 1, 1);
-      // sortie_int(0);
+      sortie_int(0);
       // sortie_int(17);
       //sortie_int(n);
-      sortie_int_bsrr(n);
+      //sortie_int_bsrr(n);
       //chenillard(n%12);
-      //write_leds_int(n%12);
+      //write_leds_int(0);
       plusplus ();
    }
    return 0;
