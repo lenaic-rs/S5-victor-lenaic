@@ -47,4 +47,6 @@ void write_leds_int_bsrr (uint16_t intval);
 // Set leds pins mode as output
 void config_leds_pins ();
 
+void write_leds_int_variante (char green, char orange, char red, char blue);
+
 #endif // BP_LEDS_H

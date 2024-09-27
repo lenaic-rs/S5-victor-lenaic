@@ -47,9 +47,9 @@ void systick_config(uint32_t reload_val) {
 }
 
 void sortie_int (uint16_t v) {
-   //GPIOD_ODR=0x2345;
+   GPIOD_ODR=0x2345;
    write_leds_int(v);
-   //val= GPIOD_ODR;
+   val= GPIOD_ODR;
 }
 
 void sortie_int_bsrr (uint16_t v) {
@@ -71,15 +71,22 @@ void chenillard (uint16_t v) {
     
 int main (void) {
    coldstart();
-   //config_leds_pins();   
+   config_leds_pins();   
    //systick_config(RELOAD_VAl_350MS);
    while (1) {
-      sortie_int(3);
+      // write_leds_int_variante(0, 0, 0, 1);
+      // write_leds_int_variante(0, 0, 1, 0);
+      // write_leds_int_variante(0, 1, 0, 0);
+      // write_leds_int_variante(1, 0, 0, 0);
+      // write_leds_int_variante(1, 0, 1, 0);
+      // write_leds_int_variante(1, 1, 1, 1);
+      sortie_int(0);
+      // sortie_int(17);
       //sortie_int(n);
       //sortie_int_bsrr(n);
       //chenillard(n%12);
       //write_leds_int(n%12);
-      //plusplus ();
+      plusplus ();
    }
    return 0;
 }
