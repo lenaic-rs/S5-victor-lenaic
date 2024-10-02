@@ -4,6 +4,8 @@ declare -A table_mauvais
 declare -A different_bug
 
 dir="bons/programs"
+lines=$(ls -l $dir | wc -l)
+lines=$(expr $lines - 1)
 
 
 for i in $(seq 1 10)
@@ -13,11 +15,12 @@ do
     for program in $dir/*
     do
         output=$(echo $input |./$program)
-        if [[ $output != "Mauvais parenthesage" ]]
+        if [[ $output != "Bon parenthesage" ]]
         then
+            echo $output
             table_mauvais[$program]=$program
             #different_bug[$bon]=$bon
-            echo "Error in $program: $bon"
+            echo "Error in $program: $input"
             rm $program || true 
         fi
 
@@ -31,8 +34,6 @@ done
 # echo ""
 # echo Clés : ${!table_mauvais[*]}
 # echo ""
-lines=$(ls -l $dir | wc -l)
-lines=$(expr $lines - 1)
 echo Nb de program mauvais: ${#table_mauvais[@]}
 echo Nb de program bon: $(expr $lines - ${#table_mauvais[@]})
 echo Nb de bug differents: ${#different_bug[@]}

@@ -3,10 +3,9 @@
 #include <stdlib.h>
 #include <time.h>
 
-#define N 500
-int stack[N * 2];
+int stack[20000];
 
-char chaine[1000];
+char chaine[20000];
 
 
 char fermante(char c) {
