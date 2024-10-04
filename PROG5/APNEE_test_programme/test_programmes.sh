@@ -5,33 +5,50 @@ declare -A different_bug
 
 dir="bons/programs"
 lines=$(ls -l $dir | wc -l)
+echo $lines
 lines=$(expr $lines - 1)
 
 for program in $dir/*
 do
-    for bon in tests_bon/*
-    do
-        output=$(./$program <$bon)
-        if [[ $output != "Bon parenthesage" ]]
-        then
-            table_mauvais[$program]=$program
-            different_bug[$bon]=$bon
-            # echo "Error in $program: $bon"
-            rm $program || true
-        fi
-    done
+    echo $program
+    if [ -e $program ]
+    then
+        echo existe
+        for bon in tests_bon/*
+        do
+            if [ -e $program ]
+            then
+                output=$(./$program <$bon)
+                if [[ $output != "Bon parenthesage" ]]
+                then
+                    table_mauvais[$program]=$program
+                    different_bug[$bon]=$bon
+                    # echo "Error in $program: $bon"
+                    rm $program || true
+                fi
+            fi
+        done
+    fi
 
-    for mauvais in tests_mauvais/*
-    do
-        output=$(./$program <$mauvais)
-        if [[ $output != "Mauvais parenthesage" ]]
-        then
-            table_mauvais[$program]=$program
-            different_bug[$mauvais]=$mauvais
-            # echo "Error in $program: $mauvais"
-            rm $program || true
-        fi
-    done
+    echo $program
+    if [ -e $program ]
+    then
+        echo existe
+        for mauvais in tests_mauvais/*
+        do
+            if [ -e $program ]
+            then
+                output=$(./$program <$mauvais)
+                if [[ $output != "Mauvais parenthesage" ]]
+                then
+                    table_mauvais[$program]=$program
+                    different_bug[$mauvais]=$mauvais
+                    # echo "Error in $program: $mauvais"
+                    rm $program || true
+                fi
+            fi
+        done
+    fi
 
     
 done

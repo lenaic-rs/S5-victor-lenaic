@@ -48,28 +48,42 @@ int main() {
             case 0:
                 chaine[chaine_len] = (rand() % 26) + 65;
                 chaine_len++;
+                bool hasard = rand() % 2;
+                if (hasard){
+                    chaine[chaine_len] = '{';
+                    chaine_len++;
+                }
                 break;
             case 1:
                 chaine[chaine_len] = '(';
                 chaine_len++;
-                chaine[chaine_len] = '{';
-                chaine_len++;
+                hasard = rand() % 2;
+                if (hasard){
+                    chaine[chaine_len] = '{';
+                    chaine_len++;
+                }
                 stack[stack_len] = '(';
                 stack_len++;
                 break;
             case 2:
                 chaine[chaine_len] = '[';
                 chaine_len++;
-                chaine[chaine_len] = '(';
-                chaine_len++;
+                hasard = rand() % 2;
+                if (hasard){
+                    chaine[chaine_len] = '(';
+                    chaine_len++;
+                }
                 stack[stack_len] = '[';
                 stack_len++;
                 break;
             case 3:
                 chaine[chaine_len] = '{';
                 chaine_len++;
-                chaine[chaine_len] = '[';
-                chaine_len++;
+                hasard = rand() % 2;
+                if (hasard){
+                    chaine[chaine_len] = '[';
+                    chaine_len++;
+                }
                 stack[stack_len] = '{';
                 stack_len++;
                 break;

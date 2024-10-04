@@ -6,7 +6,7 @@ declare -A different_bug
 dir="bons/programs"
 lines=$(ls -l $dir | wc -l)
 lines=$(expr $lines - 1)
-
+echo ieohozeifhzoeifh
 
 for i in $(seq 1 10)
 do
@@ -14,16 +14,19 @@ do
 
     for program in $dir/*
     do
-        output=$(echo $input |./$program)
-        if [[ $output != "Bon parenthesage" ]]
+        echo $program
+        if [ -e $program ]
         then
-            echo $output
-            table_mauvais[$program]=$program
-            #different_bug[$bon]=$bon
-            echo "Error in $program: $input"
-            rm $program || true 
+            output=$(echo $input |./$program)
+            if [[ $output != "Mauvais parenthesage" ]]
+            then
+                echo $output
+                table_mauvais[$program]=$program
+                #different_bug[$bon]=$bon
+                echo "Error in $program: $input"
+                rm $program || true 
+            fi
         fi
-
     done
 done
 
