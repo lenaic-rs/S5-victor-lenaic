@@ -10,8 +10,9 @@
 
 uint32_t rnd = 0;
 
-void init_rng_polling() {
-  RNG_CR &= (~RNG_CR_RNGEN);
+void init_rng() {
+  nvic_enable_irq(NVIC_HASH_RNG_IRQ);
+  RNG_CR |= RNG_CR_IE;
   RNG_CR |= RNG_CR_RNGEN;
 }
  
@@ -23,27 +24,19 @@ void systick_config(uint32_t reload_val) {
 }
 
 void sys_tick_handler(){
-  
+
 }
 
-int check_seed_error() {
-  return ((RNG_SR & RNG_SR_SECS) != 0);
+int check_no_seed_error() {
+  return ((RNG_SR & RNG_SR_SECS) == 0);
 }
 
-int check_clock_error() {
-  return ((RNG_SR & RNG_SR_CECS) != 0);
+int check_no_clock_error() {
+  return ((RNG_SR & RNG_SR_CECS) == 0);
 }
 
 int check_data_ready() {
   return ((RNG_SR & RNG_SR_DRDY) != 0);
-}
-
-void wait_for_new_rnd() {
-  while (!check_data_ready()) {  
-    if (check_seed_error() || check_clock_error()) {
-      init_rng_polling();
-    }
-  }
 }
 
 int main (void) {	
@@ -52,10 +45,8 @@ int main (void) {
   gpio_mode_setup(GPIOD, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, LEDS_MASK);
   systick_config(RELOAD_VAl_350MS);
   
-  init_rng_polling(); 
-  while(1) {
-                   //  <-- ?
-                   //  <-- ? 
-  }
+  init_rng();
+  while(1);
   return 0;
 }
+
