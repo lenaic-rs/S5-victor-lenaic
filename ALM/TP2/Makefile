@@ -1,4 +1,4 @@
-BOOT=rom                   # BOOT=rom or BOOT=ram
+BOOT=ram                   # BOOT=rom or BOOT=ram
 
 XPACK_DIRECTORY ?= /opt/STM32_XPACK/XPACK
 

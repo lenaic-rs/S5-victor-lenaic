@@ -42,7 +42,7 @@ void systick_config(uint32_t reload_val) {
    systick_set_clocksource(STK_CSR_CLKSOURCE_AHB_DIV8);
    systick_set_reload(reload_val);
    // sera a completer au prochain TP
-   
+   systick_interrupt_enable();
    systick_counter_enable();
 }
 
@@ -68,11 +68,15 @@ void chenillard (uint16_t v) {
    delay(5);
    write_leds_int(leds_seq[v]);
 }
+
+/*void sys_tick_handler() {
+   plusplus();
+}*/
     
 int main (void) {
    coldstart();
    config_leds_pins();   
-   //systick_config(RELOAD_VAl_350MS);
+   systick_config(RELOAD_VAl_350MS);
    while (1) {
       //write_leds_int_variante(0, 0, 0, 0);
       // write_leds_int_variante(0, 0, 1, 0);
@@ -80,13 +84,13 @@ int main (void) {
       // write_leds_int_variante(1, 0, 0, 0);
       // write_leds_int_variante(1, 0, 1, 0);
       // write_leds_int_variante(1, 1, 1, 1);
-      sortie_int(0);
+      //sortie_int(0);
       // sortie_int(17);
       //sortie_int(n);
       //sortie_int_bsrr(n);
       //chenillard(n%12);
-      //write_leds_int(0);
-      plusplus ();
+      write_leds_int(n%12);
+      //plusplus ();
    }
    return 0;
 }
