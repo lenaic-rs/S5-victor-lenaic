@@ -46,11 +46,11 @@ void spi_mems_configure_pins () {
 }
 
 void spi_lis_mems_select () {
-  
+  gpio_clear(GPIOE, GPIO3);
 }
 
 void spi_lis_mems_deselect () {
-  
+  gpio_set(GPIOE, GPIO3);
 }
 
 void init_spi1 () {
@@ -72,15 +72,24 @@ void init_spi1 () {
 
 uint8_t spi_read_command (uint8_t add) {
    uint8_t result;
-   
+   spi_lis_mems_select();
+   spi_send(SPI1, (add | 1 << 7));
+   spi_read(SPI1);
+   spi_send(SPI1, 0);
+   result = spi_read(SPI1);
+   spi_lis_mems_deselect();   
    return result;
 }
 
 void spi_write_command (uint8_t add,  uint8_t data) {
-
+   spi_lis_mems_select();
+   spi_send(SPI1, (add & (~(1 << 7))));
+   spi_read(SPI1);
+   spi_send(SPI1, data);
+   spi_read(SPI1);
+   spi_lis_mems_deselect();  
 }
 
-/*
 void mems_init () {
    // Lis3dsh appplication note, operating modes, page 10 :
    // On power up, lis3dsh download calibration from its internal rom
@@ -89,22 +98,22 @@ void mems_init () {
    // But rcc_clock_setup_pll seems long enough so
    // no extra delay is provided here
 
-   spi_write_command(     , LIS3_CTRL5_INIT);
-   spi_write_command(     , LIS3_CTRL6_INIT);
-   spi_write_command(     , LIS3_FIFO_CTRL_INIT);
+   spi_write_command(0x24, LIS3_CTRL5_INIT);
+   spi_write_command(0x25, LIS3_CTRL6_INIT);
+   spi_write_command(0x2E, LIS3_FIFO_CTRL_INIT);
 
-   spi_write_command(     , LIS3_CTRL4_INIT);
-   spi_write_command(     , LIS3_CTRL3_INIT);
+   spi_write_command(0x20, LIS3_CTRL4_INIT);
+   spi_write_command(0x23, LIS3_CTRL3_INIT);
 
 }
-*/
 
 void mems_wait_sample () {
-  
+  while ((spi_read_command(0x27) & (1 << 3)) == 0) {}
 }
 
 void mems_read_sample () {
-
+   x = spi_read_command(0x29);
+   y = spi_read_command(0x2B);
 }
 
 void mems_display_sample () {

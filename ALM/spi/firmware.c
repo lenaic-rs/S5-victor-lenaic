@@ -35,13 +35,13 @@ int main (void) {
    config_leds_pins();
    init_spi1();
    // 1. on verifie s'il y a bien 0x3f dans WHO_AM_I (test lecture)
-
+   v = spi_read_command(0x0F);
    // 2. on ecrit 0x22 dans OFF_X et on relit (test ecriture)
-   
-   
+   spi_write_command(0x10, 0x22);
+   v = spi_read_command(0x10);
    // 3. si tout s'est bien passe, on pourra remettre 0x00 dans
    // OFF_X et puis continuer...
-   
+   spi_write_command(0x10, 0x00);
    mems_init ();
    while (1) {
       mems_wait_sample();
