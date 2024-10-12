@@ -5,14 +5,14 @@
 // l'entier k "est dans" le crible c
 int present(int k, uint32_t *c)
 {
-    uint16_t m = 1 << (k % 32);
+    uint32_t m = 1 << (k % 32);
     return (c[k / 32] & m) != 0;
 }
 
 void suppression(int k, uint32_t *c)
 {
     
-    uint16_t m = 1 << (k % 32);
+    uint32_t m = 1 << (k % 32);
     c[k / 32] = c[k / 32] & ~m;
 }
 
