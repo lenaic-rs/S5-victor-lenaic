@@ -35,7 +35,7 @@ int main(int argc, char *argv[]) {
 
     srand( time( NULL ) );
 
-
+    int maj = 0;
     int i = 0;
     int stack_len = 0; // stack = PileVide()
     int longueur = atoi(argv[1]);
@@ -56,7 +56,17 @@ int main(int argc, char *argv[]) {
                     niveau_imbrication++;
                     break;
                 case 1: // { c est une parenthèse fermante }
-                    c = (rand() % 26) + 65; // caractère non parenthèse
+                    maj = rand()%2;
+                    switch(maj){
+                        case 0:
+                            c = (rand() % 26) + 97; // caractère non parenthèse (minuscule)
+                            break;
+                        case 1:
+                            c = (rand() % 26) + 65; // caractère non parenthèse (majuscule)
+                            break;
+                        default:
+                            exit(1);
+                    }
                     break;
                 default:
                     exit(1);
@@ -74,7 +84,17 @@ int main(int argc, char *argv[]) {
                     niveau_imbrication--;
                     break;
                 case 1: // { c est une parenthèse fermante }
-                    c = (rand() % 26) + 65; // caractère non parenthèse
+                    maj = rand()%2;
+                    switch(maj){
+                        case 0:
+                            c = (rand() % 26) + 97; // caractère non parenthèse (minuscule)
+                            break;
+                        case 1:
+                            c = (rand() % 26) + 65; // caractère non parenthèse (majuscule)
+                            break;
+                        default:
+                            exit(1);
+                    }
                     break;
                 case 2:
                     c = ouvrante(); // parenthèse ouvrante
@@ -82,8 +102,6 @@ int main(int argc, char *argv[]) {
                     stack_len++;
                     niveau_imbrication++;
                     break;
-                default:
-                    exit(1);
             }
             printf("%c", c);
             i++;
