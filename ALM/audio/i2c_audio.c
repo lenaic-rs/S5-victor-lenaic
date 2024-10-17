@@ -69,7 +69,7 @@ void clear_addr_bit () {
 } 
 
 void send_address (bool read) { 
-  i2c_send_7bit_address(I2C1, 0x4a, read);
+  i2c_send_7bit_address(I2C1, CS42L22_I2C_ADDRESS, read);
 } 
 
 void write_cs (uint8_t regnum, uint8_t regval) {
