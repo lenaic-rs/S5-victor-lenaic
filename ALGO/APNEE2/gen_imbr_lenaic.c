@@ -38,8 +38,19 @@ int main(int argc, char *argv[])
 
     while (!imbrication_min_reached || (stack_len > 0))
     {
+        bool ajouter;
+        // si on a pas encore atteint le nombre minimal d'imbrication
+        // on donne plus de chance d'ajouter un caractère
+        if (!imbrication_min_reached)
+        {
 
-        bool ajouter = rand() % 2;
+            ajouter = rand() % 5;
+        }
+        else
+        {
+
+            ajouter = rand() % 2;
+        }
 
         if (ajouter)
         {
