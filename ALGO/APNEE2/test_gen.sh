@@ -6,15 +6,14 @@ declare -A different_bug
 dir="bons/programs"
 lines=$(ls -l $dir | wc -l)
 lines=$(expr $lines - 1)
-echo ieohozeifhzoeifh
 
 for i in $(seq 1 10)
 do
-    input=$(./a.out)
+    input=$(./a.out $1 $2)
 
     for program in $dir/*
     do
-        echo $program
+        #echo $program
         if [ -e $program ]
         then
             output=$(echo $input |./$program)
