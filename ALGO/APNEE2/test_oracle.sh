@@ -1,4 +1,12 @@
-#!/bin/bash -
+#!/bin/bash
+
+# Ce script utilisera le programme "a.out" pour générer 
+# une chaine aléatoire.
+# Il executera tous les programmes present dans le repertoire
+# "bons/programs"
+# Grace a l'oracle, il verifira si le resultat est le bon, et supprimera le program si
+# il est mauvais. 
+# Il donne aussi des stats a la fin de son execution.
 
 declare -A table_mauvais
 declare -A different_bug
@@ -33,7 +41,7 @@ do
                 table_mauvais[$program]=$program
                 #different_bug[$bon]=$bon
                 echo "Error in $program: $input"
-                # rm $program || true 
+                rm $program || true 
             fi
         fi
     done
