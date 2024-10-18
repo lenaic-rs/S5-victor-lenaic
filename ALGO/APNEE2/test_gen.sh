@@ -17,12 +17,12 @@ do
         if [ -e $program ]
         then
             output=$(echo $input |./$program)
-            if [[ $output != "Mauvais parenthesage" ]]
+            if [[ $output != "Bon parenthesage" ]]
             then
-                echo $output
+                #echo $output
                 table_mauvais[$program]=$program
                 #different_bug[$bon]=$bon
-                echo "Error in $program: $input"
+                #echo "Error in $program: $input"
                 rm $program || true 
             fi
         fi
