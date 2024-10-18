@@ -23,7 +23,7 @@ char fermante(char c)
     }
 }
 
-int main()
+int main(int argc, char *argv[])
 {
 
     srand(time(NULL));
@@ -32,7 +32,7 @@ int main()
     int stack_len = 0;
     int chaine_len = 0;
 
-    int longueur = rand() % 100;
+    int longueur = atoi(argv[1]);
 
     while (i < longueur || stack_len > 0)
     {
