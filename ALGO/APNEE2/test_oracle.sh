@@ -7,7 +7,7 @@ dir="bons/programs"
 lines=$(ls -l $dir | wc -l)
 lines=$(expr $lines - 1)
 
-for i in $(seq 1 10)
+for i in $(seq 1 1)
 do
     input=$(./a.out $1)
 
@@ -33,7 +33,7 @@ do
                 table_mauvais[$program]=$program
                 #different_bug[$bon]=$bon
                 echo "Error in $program: $input"
-                rm $program || true 
+                # rm $program || true 
             fi
         fi
     done

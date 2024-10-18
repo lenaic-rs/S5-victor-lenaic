@@ -18,6 +18,22 @@ char fermante(char c)
     }
 }
 
+char ouvrante(char c)
+{
+
+    switch (c)
+    {
+    case ')':
+        return '(';
+    case ']':
+        return '[';
+    case '}':
+        return '{';
+    default:
+        exit(1);
+    }
+}
+
 int OracleParenthesage(FILE *input, int reponse)
 {
 
@@ -43,7 +59,7 @@ int OracleParenthesage(FILE *input, int reponse)
         case ')':
         case '}':
         case ']':
-            if (stack_head <= 0 || stack[stack_head - 1] != fermante(ch))
+            if (stack_head <= 0 || stack[stack_head - 1] != ouvrante(ch))
             {
                 error = 1;
                 break;
